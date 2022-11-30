@@ -1,0 +1,85 @@
+version: '3.9'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    container_name: service_zookeeper
+    ports:
+      - 2181:2181
+    networks:
+      - adonis_service_network
+    
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: service_kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 172.17.0.1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENERS: 'INTERNAL://:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'INTERNAL://:9092'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'INTERNAL:PLAINTEXT'
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: '1'
+      KAFKA_CREATE_TOPICS: users:1:1
+      # KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    ports:
+      - 9092:9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - adonis_service_network
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server 192.168.0.16:9092 --topic users --describe"]
+      interval: 2s
+      timeout: 6s
+      retries: 15
+ 
+  service_users:
+    container_name: service_users
+    restart: always
+    build:
+      context: ./service-users
+      dockerfile: Dockerfile
+    env_file:
+      - ./service-users/.env
+    ports:
+      - "3333:3333"
+    volumes:
+      - "./service-users:/home/node/app:rw"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    command: 
+      - sh
+      - -c
+      - "npm install && chmod 777 -R ./node_modules && npm run dev"
+    networks:
+      - adonis_service_network
+    
+  service_logs:
+    container_name: service_logs
+    restart: always
+    build:
+      context: ./service-logs
+      dockerfile: Dockerfile
+    env_file:
+      - ./service-logs/.env
+    ports:
+      - "3334:3334"
+    volumes:
+      - "./service-logs:/home/node/app:rw"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    command: 
+      - sh
+      - -c
+      - "npm install && chmod 777 -R ./node_modules && npm run dev"
+    networks:
+      - adonis_service_network
+   
+networks: 
+  adonis_service_network:
+

@@ -1,0 +1,37 @@
+{
+  "typescript": true,
+  "commands": ["./commands", "@adonisjs/core/build/commands/index.js"],
+  "exceptionHandlerNamespace": "App/Exceptions/Handler",
+  "aliases": {
+    "App": "app",
+    "Config": "config",
+    "Database": "database",
+    "Contracts": "contracts"
+  },
+  "preloads": [
+    "./start/routes",
+    "./start/kafka",
+    "./start/kernel",
+    {
+      "file": "./start/kafka",
+      "environment": ["web"]
+    }
+  ],
+  "providers": ["./providers/AppProvider", "@adonisjs/core", "./providers/KafkaProvider"],
+  "metaFiles": [
+    {
+      "pattern": "public/**",
+      "reloadServer": false
+    }
+  ],
+  "tests": {
+    "suites": [
+      {
+        "name": "functional",
+        "files": ["tests/functional/**/*.spec(.ts|.js)"],
+        "timeout": 60000
+      }
+    ]
+  },
+  "testProviders": ["@japa/preset-adonis/TestsProvider"]
+}
