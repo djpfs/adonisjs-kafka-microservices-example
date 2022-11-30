@@ -16,14 +16,14 @@ export default class KafkaProvider {
   }
 
   public async boot() {
-
-  }
-
-  public async ready() {
     const Config = this.app.container.resolveBinding('Adonis/Core/Env')
     if (String(Config.get('KAFKA_ENABLED')) === 'true') {
       this.app.container.use('Message/Kafka').start()
     }
+  }
+
+  public async ready() {
+
   }
 
   public async shutdown() {

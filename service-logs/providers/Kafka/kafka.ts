@@ -34,17 +34,17 @@ export default class Kafka implements KafkaContract {
 
     public on(topic: string, callback: any) {
         if (this.config.enabled !== 'true') return callback
-        if (this.consumer == undefined) {
-            this.start()
-        }
+        // if (this.consumer == undefined) {
+        //     this.start()
+        // }
         this.consumer.on(topic, callback)
     }
 
     public send(topic: string, data: any) {
         if (this.config.enabled !== 'true') return
-        if (this.producer == undefined) {
-            this.start()
-        }
+        // if (this.producer == undefined) {
+        //     this.start()
+        // }
         return this.producer.send(topic, data)
     }
 
