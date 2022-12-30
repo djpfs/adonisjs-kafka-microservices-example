@@ -15,6 +15,10 @@
       "Database/*": ["./database/*"],
       "Providers": ["./providers/*"]
     },
-    "types": ["@adonisjs/core", "@japa/preset-adonis/build/adonis-typings"]
+    "types": [
+      "@adonisjs/core",
+      "@japa/preset-adonis/build/adonis-typings",
+      "@djpfs/kafka-adonisjs/build/adonis-typings"
+    ]
   }
 }

@@ -6,6 +6,10 @@ Exemplo de dois serviços feitos com AdonisJs v5 e utilizando Apache Kafka para 
 
 O serviço `service-users` é responsável por enviar mensagens para o tópico `users` do Kafka. O serviço `sercice-logs` é responsável por consumir as mensagens do tópico `users` e exibir no console.
 
+## Packages utilizados
+
+Kafka AdonisJs: [here](https://www.npmjs.com/package/@djpfs/kafka-adonisjs).
+
 ## Configuração
 
 Crie um arquivo `.env` na pasta `service-users` e `service-logs` baseado no arquivo `.env.example` (Presente dentro de cada um) e altere as variáveis de ambiente caso queira mudar alguma configuração.

@@ -6,6 +6,10 @@ Example of two services made with AdonisJs v5 and using Apache Kafka to communic
 
 The `service-users` service is responsible for sending messages to the Kafka `users` topic. The `service-logs` service is responsible for consuming messages from the `users` topic and displaying them in the console.
 
+## Packages used
+
+Kafka AdonisJs: [here](https://www.npmjs.com/package/@djpfs/kafka-adonisjs).
+
 ## Configuration
 
 Create an `.env` file in the `service-users` and `service-logs` folder based on the `.env.example` file (present inside each one) and change the environment variables if you want to change any configuration.

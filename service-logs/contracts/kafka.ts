@@ -1,7 +1,6 @@
 declare module '@ioc:Message/Kafka' {
-    import Kafka from 'providers/Kafka/kafka'
+  import Kafka from '@djpfs/kafka-adonisjs'
+  const kafka: Kafka
 
-    const kafka: Kafka
-
-    export default kafka
+  export default kafka
 }
