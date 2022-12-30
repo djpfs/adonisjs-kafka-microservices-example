@@ -11,7 +11,7 @@ function makeKafkaConfig(env: any) {
     partitionsConcurrently: 1,
     connectionTimeout: 3000,
     requestTimeout: 60000,
-    logLevel: 1,
+    logLevel: 0,
   }
 }
 

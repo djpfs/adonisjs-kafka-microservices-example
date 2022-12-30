@@ -27,6 +27,8 @@ cp service-users/.env.example service-users/.env
 docker-compose up
 ```
 
-You can access the `service-users` service at `http://localhost:3333/<ANY-ID>` to post a message to the Kafka `users` topic.
+You can access the `service-users` service at [http://localhost:3333/some-think](http://localhost:3333/some-think) to post a message to the Kafka `users` topic.
 
 In the terminal you ran the `docker-compose up` command you should see the message being displayed in the console.
+
+You can also go to [http://localhost:19000](http://localhost:19000) to look at kafdrop and see what messages are being sent.

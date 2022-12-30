@@ -57,8 +57,7 @@
     "@adonisjs/ace": "^11.3.1",
     "@adonisjs/core": "^5.9.0",
     "@adonisjs/fold": "^8.2.0",
-    "@djpfs/kafka-adonisjs": "^1.0.1",
-    "kafkajs": "^2.2.3",
+    "@djpfs/kafka-adonisjs": "^1.0.4",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21"

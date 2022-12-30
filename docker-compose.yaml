@@ -92,4 +92,5 @@ services:
       - adonis_service_network
 networks:
   adonis_service_network:
+    name: adonis_service_network
 
